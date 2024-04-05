@@ -1,0 +1,3 @@
+type_of_sequence: "single"
+adaptor_sequence: ""
+output_file_name: "variants.vcf"
