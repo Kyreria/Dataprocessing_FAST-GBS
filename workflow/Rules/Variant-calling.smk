@@ -1,3 +1,8 @@
+'''
+This is the snakemake file to invoke and use Platypus for the variant calling.
+'''
+
+
 
 rule reference_index:
     input:

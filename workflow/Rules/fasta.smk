@@ -1,4 +1,7 @@
-
+'''
+This Snakefile is to demultiplex the fasta files,
+ so they can be used by the rest of the rules.
+'''
 
 rule demultiplex:
     # Input needs to be barcode file & fastQ bestanden

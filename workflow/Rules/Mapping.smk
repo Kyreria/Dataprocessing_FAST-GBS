@@ -1,4 +1,7 @@
-
+'''
+This snakefile is to align and map the reads,
+ so they can be used for variant calling.
+'''
 
 rule alignment:
     input:

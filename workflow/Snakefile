@@ -1,3 +1,8 @@
+'''
+This is the main script that has to be executed.
+Includes all the Snakefiles needed to execute the workflow.
+'''
+
 configfile: "config/config.yaml"
 
 
@@ -5,6 +10,7 @@ rule all:
     input:
         "results/variants.vcf"
 
-
-
-
+include: "Rules/fasta.smk"
+include: "Rules/Mapping.smk"
+include: "Rules/Trimming.smk"
+include: "Rules/Variant-calling.smk"
