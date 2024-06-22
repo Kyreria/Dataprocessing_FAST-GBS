@@ -5,56 +5,6 @@ rule all:
     input:
         "results/variants.vcf"
 
-rule demultiplex:
-    # Input needs to be barcode file & fastQ bestanden
-    input:
-        barcodes="",
-        fastQ=""
-    output:
-        "results/demultiplexed/{wildcard}.fastq"
-    message: "Demultiplexing {input.fastQ} using SABRE."
-    shell:
-        "sabre se -f {input.fastQ} -b {input.barcodes} -u unknown_barcode.fastq > {output}"
 
-rule trim_and_cut:
-    # Input needs to be the demultiplexed FastQ bestanden
-    input:
-        ""
-    output:
-        ""
-    message: "Trimming and cutting files with CutAdapt"
-    shell:
-        "cutadapt "
 
-rule alignment:
-    input:
-        ""
-    output:
-        ""
-    message: "Be"
 
-rule samtool_index:
-    input:
-        ""
-    output:
-        ""
-    message: "Indexing the BAM files for the Platypus mapping."
-
-rule reference_index:
-    input:
-        ""
-    output:
-        "results/reference/"
-    message: "Indexing the used reference for the BAM mapping for the Platypus variant calling."
-
-rule platypus_variant_calling:
-    # This needs to open up a different conda enviroment that's running in python 2.7
-    input:
-        reference="",
-        bamfiles=""
-    output:
-        "results/variants.vcf"
-    message: "Calling variants using Platypus on the following BAM files: {bamfiles}"
-    shell:
-        "python Platypus.py callVariants --bamFiles={input.bamfiles} --refFile={input.reference}"
-        " --output=variants.vcf > {output}"
