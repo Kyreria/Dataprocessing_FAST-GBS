@@ -3,14 +3,26 @@ This is the main script that has to be executed.
 Includes all the Snakefiles needed to execute the workflow.
 '''
 
+#Configuration yaml.
 configfile: "config/config.yaml"
 
 
-rule all:
-    input:
-        "results/variants.vcf"
+#Global variable
+data_dir = config["data_dir"]
+results_dir = config["results_dir"]
+barcodes = config["barcodes.txt"]
+ref_genome = config["ref_genome"]
 
+
+#Included rules
 include: "Rules/fasta.smk"
 include: "Rules/Mapping.smk"
 include: "Rules/Trimming.smk"
 include: "Rules/Variant-calling.smk"
+
+
+#Output is the variant file and the plotted variants.
+rule all:
+    input:
+        "results/variants.vcf",
+        "results/variant_plots.png"
