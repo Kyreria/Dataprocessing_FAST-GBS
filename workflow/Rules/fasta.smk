@@ -30,3 +30,12 @@ rule demultiplex:
         sabre se -f {input.R1} -r {input.R2} -b {input.barcodes} -u unknown_sample_R1.fastq - w unkown_sample_R2.fastq -c
         ) > {log} 2>&1
         """
+
+rule seperate_paired_reads:
+    input:
+        fastq_file = f"{data_dir}/{fastq_file}.fastq"
+    output:
+        forward_reads = "f{data_dir}/seperated/{fastq_file}.R1.fastq",
+        reverse_reads = "f{data_dir}/seperated/{fastq_file}.R2.fast"
+    message:
+        "Splitting paired end reads from a single file into 2 seperate files."
