@@ -2,6 +2,7 @@ data_dir: /students/2023-2024/Thema11/dhaandrikman_snakemake/data
 results_dir: /students/2023-2024/Thema11/dhaandrikman_snakemake/results
 ref_genome: genome.fna
 barcode_file: barcodes.txt
-type_of_sequence: "single"
+read_name: test_reads
+type_of_sequence: paired
 adaptor_sequence: ""
-output_file_name: "variants.vcf"
+output_file_name: variants.vcf
