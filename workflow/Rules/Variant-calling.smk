@@ -2,8 +2,6 @@
 This is the snakemake file to invoke and use Platypus for the variant calling.
 '''
 
-
-
 rule reference_index:
     input:
         ""
@@ -14,11 +12,14 @@ rule reference_index:
 rule platypus_variant_calling:
     # This needs to open up a different conda enviroment that's running in python 2.7
     input:
-        reference="",
+        reference=f"{data_dir}/{ref_genome}",
         bamfiles=""
     output:
         "results/variants.vcf"
     message: "Calling variants using Platypus on the following BAM files: {bamfiles}"
+    log:
+        "logs/platypus.log"
     shell:
-        "python Platypus.py callVariants --bamFiles={input.bamfiles} --refFile={input.reference}"
-        " --output=variants.vcf > {output}"
+        "python Platypus.py callVariants --bamFiles {input.bamfiles} --refFile {input.reference}"
+        " --output {output}"
+        "--logFileName platypus.log"
