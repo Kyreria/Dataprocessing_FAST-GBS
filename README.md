@@ -83,10 +83,10 @@ This pipeline will generate the following output files in your `results_dir`.
 
 To visualize the pipeline, please use the following command:
 
-```snakemake --dag | dot -Tsvg > dag.svg```
+```snakemake --dag | dot -Tsvg > Images/dag.svg```
 
 This will generate an SVG file called `dag.svg` which can be viewed in an image viewer or on a web browser.
 
 The image is also included below if you do not wish to run the command yourself.
 
-![This is the Dag image, a schematic overview of the pipeline](dag.png)
+![This is the Dag image, a schematic overview of the pipeline](Images/dag.png)
