@@ -16,7 +16,7 @@ rule trim_and_cut:
         # https://cutadapt.readthedocs.io/en/stable/guide.html#
         extra="--minimum-length 1 -q 20"
     log:
-        f"logs/cutadapt/{sample}.log"
+        f"logs/cutadapt/{sample_name}.log"
     message:
         "Trimming and cutting files with CutAdapt"
     threads: 8
