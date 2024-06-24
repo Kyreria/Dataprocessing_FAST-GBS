@@ -5,14 +5,14 @@ This snakefile is to align and map the reads,
 
 rule bwa_mem:
     input:
-        reads=["reads/{sample}_R1.fastq", "reads/{sample}_R2.fastq"],
+        reads=[f"trimmed/{sample_name}_R1.fastq", f"trimmed/{sample_name}_R2.fastq"],
         idx=multiext("genome", ".amb", ".ann", ".bwt", ".pac", ".sa")
     output:
-        "results/mapped/{sample}.bam"
+        f"results/mapped/{sample_name}.bam"
     log:
-        "logs/bwa_mem/{sample}.log"
+        f"logs/bwa_mem/{sample_name}.log"
     params:
-        extra=r"-R '@RG\tID:{sample}\tSM:{sample}'",
+        extra="",
         sorting="samtools",  # Can be 'none', 'samtools' or 'picard'.
         sort_order="queryname",  # Can be 'queryname' or 'coordinate'.
         sort_extra=""  # Extra args for samtools/picard.
@@ -22,16 +22,14 @@ rule bwa_mem:
 
 rule bwa_index:
     input:
-        genome = f"{data_dir}/{ref_genome}"
+        genome = f"{data_dir}/{ref_genome}{ref_genome_ext}"
     output:
         index = touch("results/flag/genome_indexed")
-    message: "Indexing the BAM files for the Platypus mapping."
+    message: "Indexing the reference genome for bwa mem mapping."
     log:
         "logs/bwa_index.log"
     shell:
-        """
-        ( if [ "$(ls {data_dir} | grep "{genome}" | wc -1)" - lt 6]; then
-            bwa index {input.genome}
-        fi
+        """(
+        bwa index {input.genome} && touch {output}
         ) > {log} 2>&1
         """
