@@ -4,9 +4,9 @@ This is the snakemake file to plot the variant data in a plot.
 
 rule plot_variants:
     input:
-        vcf_file=f"pileups/{sample_name}.pileup.vcf"
+        vcf_file=f"{results_dir}/pileups/{sample_name}.pileup.vcf"
     output:
-        plot_file="results/variants_scatterplot.png"
+        plot_file=f"{results_dir}/variants_scatterplot.png"
     log:
         "logs/plot_variants.log"
     message:

@@ -39,5 +39,5 @@ include: "Rules/Graph_plotting.smk"
 #Output is the variant file and the plotted variants.
 rule all:
     input:
-        "results/variants.vcf",
-        "results/variant_plots.png"
+        f"{results_dir}/variants.vcf",
+        f"{results_dir}/variant_plots.png"

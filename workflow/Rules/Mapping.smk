@@ -5,12 +5,12 @@ This snakefile is to align and map the reads,
 
 rule bwa_mem:
     input:
-        reads=[f"trimmed/{sample_name}_R1.fastq", f"trimmed/{sample_name}_R2.fastq"],
+        reads=[f"{results_dir}/trimmed/{sample_name}_R1.fastq", f"{results_dir}/trimmed/{sample_name}_R2.fastq"],
         idx=multiext("genome", ".amb", ".ann", ".bwt", ".pac", ".sa")
     output:
-        f"results/mapped/{sample_name}.bam"
+        f"{results_dir}/mapped/{sample_name}.bam"
     log:
-        f"logs/bwa_mem/{sample_name}.log"
+        f"{results_dir}/logs/bwa_mem/{sample_name}.log"
     params:
         extra="",
         sorting="samtools",  # Can be 'none', 'samtools' or 'picard'.
@@ -24,10 +24,10 @@ rule bwa_index:
     input:
         genome = f"{data_dir}/{ref_genome}{ref_genome_ext}"
     output:
-        index = touch("results/flag/genome_indexed")
+        index = touch(f"{results_dir}/flag/genome_indexed")
     message: "Indexing the reference genome for bwa mem mapping."
     log:
-        "logs/bwa_index.log"
+        f"{results_dir}/logs/bwa_index.log"
     shell:
         """(
         bwa index {input.genome} && touch {output}
