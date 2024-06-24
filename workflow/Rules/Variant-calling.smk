@@ -26,7 +26,7 @@ rule bcftools_mpileup:
     input:
         alignments = f"{results_dir}/mapped/{sample_name}.bam",
         ref = f"{data_dir}/{ref_genome}{ref_genome_ext}",  # this can be left out if --no-reference is in options
-        index = f"{ref_genome}.fa.fai"
+        index = f"{results_dir}/{ref_genome}.fa.fai"
     output:
         pileup=f"{results_dir}/pileups/{sample_name}.pileup.vcf"
     params:
