@@ -36,10 +36,10 @@ This Snakefile is to demultiplex the fasta files,
 
 rule seperate_paired_reads:
     input:
-        fastq_file = f"{data_dir}/{fastq_name}.fastq"
+        fastq_file = f"{data_dir}/{sample_name}.fastq"
     output:
-        R1 = f"{data_dir}/seperated/{fastq_file}_R1.fastq",
-        R2 = f"{data_dir}/seperated/{fastq_file}_R2.fastq"
+        R1 = f"{data_dir}/seperated/{sample_name}_R1.fastq",
+        R2 = f"{data_dir}/seperated/{sample_name}_R2.fastq"
     message:
         "Splitting paired end reads from a single file into 2 seperate files."
     run:
