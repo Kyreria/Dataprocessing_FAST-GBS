@@ -39,7 +39,7 @@ rule seperate_paired_reads:
         fastq_file = f"{data_dir}/{fastq_name}.fastq"
     output:
         R1 = f"{data_dir}/seperated/{fastq_file}_R1.fastq",
-        R2 = f"{data_dir}/seperated/{fastq_file}_R2.fast"
+        R2 = f"{data_dir}/seperated/{fastq_file}_R2.fastq"
     message:
         "Splitting paired end reads from a single file into 2 seperate files."
     run:
@@ -49,6 +49,8 @@ rule seperate_paired_reads:
             pass
         # Make the second output file
         output_r2 = output.R2
+        with open(output_r2, 'w') as R2:
+            pass
         #Loop through the single file with paired ends and split them into their respective files.
         with open(input.fastq_file, "r") as input:
             counter=0
@@ -58,15 +60,15 @@ rule seperate_paired_reads:
                     case False:
                         with open(output_r1, 'a') as r1:
                             r1.write(line)
-                        counter+=1
-                        if counter==4:
-                            counter=0
-                            R2_flag =True
+                        counter+= 1
+                        if counter == 4:
+                            counter = 0
+                            R2_flag = True
                     case True:
                         with open(output_r2, 'a') as r2:
                             r2.write(line)
-                        counter+=1
-                        if counter== 4:
+                        counter+= 1
+                        if counter == 4:
                             counter = 0
                             R2_flag = False
         print("File mangling is done.")
