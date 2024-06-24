@@ -40,4 +40,4 @@ include: "Rules/Graph_plotting.smk"
 rule all:
     input:
         f"{results_dir}/pileups/{sample_name}.pileup.vcf",
-        f"{results_dir}/variants_scatterplot.png"
+        f"{results_dir}/variants.png"
