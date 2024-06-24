@@ -8,7 +8,7 @@ rule plot_variants:
     output:
         plot_file=f"{results_dir}/variants_scatterplot.png"
     log:
-        "logs/plot_variants.log"
+        f"{results_dir}/logs/plot_variants.log"
     message:
         "Plotting the variants now!"
     shell:
