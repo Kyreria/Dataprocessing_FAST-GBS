@@ -13,7 +13,7 @@ results_dir = config["results_dir"]
 # barcodes = config["barcodes.txt"]
 ref_genome = config["ref_genome"]
 ref_genome_ext = config["ref_genome_ext"]
-sample_name = config["fastq_name"]
+sample_name = config["sample_name"]
 sample_ext = config["sample_ext"]
 
 
