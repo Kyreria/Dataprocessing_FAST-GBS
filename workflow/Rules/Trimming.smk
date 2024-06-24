@@ -7,8 +7,8 @@ rule trim_and_cut:
     input:
         [f"{data_dir}/seperated/{sample_name}_R1.fastq", f"{data_dir}/seperated/{sample_name}_R2.fastq"]
     output:
-        fastq1=f"{results_dir}/trimmed/{sample_name}.1.fastq",
-        fastq2=f"{results_dir}/trimmed/{sample_name}.2.fastq",
+        fastq1=f"{results_dir}/trimmed/{sample_name}_R1.fastq",
+        fastq2=f"{results_dir}/trimmed/{sample_name}_R2.fastq",
         qc=f"{results_dir}/trimmed/{sample_name}.qc.txt"
     params:
         # https://cutadapt.readthedocs.io/en/stable/guide.html#adapter-types
