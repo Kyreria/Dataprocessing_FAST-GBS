@@ -1,14 +1,16 @@
 # Dataprocessing_FAST-GBS
 Dataprocessing project for converting the FAST-GBS pipeline to a snakemake pipeline.
-This is the final assigment for the Data Processing course from the Bioinformatics bachelor program of the Hanze University of Applied Scieces.
+This is the final assigment for the Data Processing course from the Bioinformatics bachelor program of the [Hanze University of Applied Scieces.](https://www.hanze.nl/nl)
+
+Crossed out sections have been scrapped till a fix is found for their implementation.
 
 The pipeline performs the following steps:
 
-1. Demultiplexing raw sequencing reads using Sabre.
+1. ~~Demultiplexing raw sequencing reads using Sabre.~~ Input a Fastq file, currently splitting a single paired end file into a (sample)_r1 and (sample)_2 file.
 2. Adapter trimming with CutAdapt
 3. Read mapping with BWA-MEM
-4. Variant calling with Platypus
-5. Visualization of the VCF file with an R-script.
+4. Variant calling with ~~Platypus~~ BCFTools mpileup.
+5. Visualization of the VCF file with an R-script, here we use the [plot-VCF package](https://github.com/cccnrc/plot-VCF).
 
 ## Prerequisites
 To run this pipeline, you will need the following software installed.
@@ -26,21 +28,15 @@ git clone https://github.com/Kyreria/Dataprocessing_FAST-GBS
 cd Dataprocessing_FAST-GBS
 ```
 
-2. 
-Due to the fact that we need multiple conda enviroments to run this Snakemake pipeline, I advise you to do the following.
+2. Prerequisites for running the pipeline.
 
-Make a conda environment for the main tools, this being cutadapt and BWA.
-Then we need a second conda environment for python 2.7, this is due to the fact that platypus hasn't been updated out of python 2.7.
-(insert detailed instructions here later, but it needs to involve the following:
+To run the pipeline, make sure that you have conda installed with mamba.
+This can otherwise be done by using the following commands.
 
-``
-conda create -n nanofilt -c bioconda nanofilt
-conda activate nanofilt
-conda env export > env/nanofilt.yaml
-``
-
-We also need to see about removing the prefix line in said yaml file, hopefully that won't be too much of a hassle.
-So yeah, fun times.
+```
+conda activate base
+conda install -n base -c conda-forge mamba
+```
 
 ## Configuration
 
@@ -50,27 +46,34 @@ Please use this file to adjust any necessary settings.
 - `data_dir`: Path to the directory for the input data.
 - `results_dir`: Path to the directory where results will be stored.
 - `ref_genome`: genome file name, which must be in the `data_dir`.
-- `barcode_file`: Barcode file name, which must also be in `data_dir`.
-- `read_name`:
+- ~~`barcode_file`: Barcode file name, which must also be in `data_dir`.~~
+- `ref_genome_ext`: The extension for the reference genome.
+- `sample_name`: The name for the sample.
+- `sample_ext`: the extension for the sample.
 - `type_of_sequence`: The type of sequence, this can be either single or paired.
-- `adaptor_sequence`: The adaptor sequence, this is for CutAdapt
-- `output_file_name`: This is for the final output
+- `adaptor_sequence`: The adaptor sequence, this is for CutAdapt.
+- `output_file_name`: This is for the final output.
 
 ## Running the pipeline
-With the correct conda environment activated, done with the following command, if you hadn't done so yet:
 
-```conda activate dataprocessing```
+Due to the fact that every tool is called upon by using the new wrapper format in Snakemake.
+You don't have to make a seperate conda enviroment anymore.
 
-We can run the snakemake pipeline using the following command:
+For more informations, see the following link: [Snakemake wrappers](https://snakemake-wrappers.readthedocs.io/en/stable/)
 
-```snakemake --cores <number_of_cores>```
+To run the snakemake pipeline, simply use the following command:
+
+```
+snakemake --cores <number_of_cores> --use-conda
+```
 
 You can replace `<number_of_cores>` with the desired number of CPU cores you wish to use.
 
 ## Output
 
 This pipeline will generate the following output files in your `results_dir`.
-- Demultiplexed FASTQ files
+
+- ~~Demultiplexed FASTQ files~~
 - Trimmed FASTQ files
 - Mapped BAM Files
 - Variants VCF File
@@ -85,3 +88,5 @@ To visualize the pipeline, please use the following command:
 This will generate an SVG file called `dag.svg` which can be viewed in an image viewer or on a web browser.
 
 The image is also included below if you do not wish to run the command yourself.
+
+![This is the Dag image, a schematic overview of the pipeline](dag.png)
