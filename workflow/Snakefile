@@ -17,17 +17,6 @@ sample_name = config["sample_name"]
 sample_ext = config["sample_ext"]
 
 
-#Global functions
-
-# def get_sample_names():
-#     sample_names = ["unknown_sample"]
-#     with open(f"{data_dir}/barcodes.txt", "r") as barcode_file:
-#         for line in barcode_file:
-#             split_line = line.strip().split(" ")
-#             sample_names.append(split_line[1].split("_R")[0])
-#     return sample_names
-
-
 #Included rules
 include: "Rules/Fasta.smk"
 include: "Rules/Mapping.smk"
