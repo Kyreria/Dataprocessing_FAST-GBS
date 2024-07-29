@@ -6,10 +6,10 @@ Crossed out sections have been scrapped till a fix is found for their implementa
 
 The pipeline performs the following steps:
 
-1. ~~Demultiplexing raw sequencing reads using Sabre.~~ Input a Fastq file, currently splitting a single paired end file into a (sample)_r1 and (sample)_2 file.
+1. Demultiplexing raw sequencing reads using Sabre.
 2. Adapter trimming with CutAdapt
 3. Read mapping with BWA-MEM
-4. Variant calling with ~~Platypus~~ BCFTools mpileup.
+4. Variant calling with BCFTools mpileup.
 5. Visualization of the VCF file with an R-script, here we use the [plot-VCF package](https://github.com/cccnrc/plot-VCF).
 
 ## Prerequisites
@@ -46,7 +46,7 @@ Please use this file to adjust any necessary settings.
 - `data_dir`: Path to the directory for the input data.
 - `results_dir`: Path to the directory where results will be stored.
 - `ref_genome`: genome file name, which must be in the `data_dir`.
-- ~~`barcode_file`: Barcode file name, which must also be in `data_dir`.~~
+- `barcode_file`: Barcode file name, which must also be in `data_dir`
 - `ref_genome_ext`: The extension for the reference genome.
 - `sample_name`: The name for the sample.
 - `sample_ext`: the extension for the sample.
@@ -73,7 +73,7 @@ You can replace `<number_of_cores>` with the desired number of CPU cores you wis
 
 This pipeline will generate the following output files in your `results_dir`.
 
-- ~~Demultiplexed FASTQ files~~
+- Demultiplexed FASTQ files
 - Trimmed FASTQ files
 - Mapped BAM Files
 - Variants VCF File
