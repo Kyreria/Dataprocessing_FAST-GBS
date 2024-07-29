@@ -8,10 +8,13 @@ rule plot_variants:
     output:
         plot_file=f"{results_dir}/variants.png"
     log:
-        f"{results_dir}/logs/plot_variants.log"
+        stdout=f"{results_dir}/logs/plot_variants.log",
+        stderr=f"{results_dir}/logs/plot_variants_error.log"
+
     message:
         "Plotting the variants now!"
     shell:
         """
-        Rscript Scripts/plot_variants.R {input.vcf_file} {output.plot_file} > {log} 2>&1
+        Rscript Scripts/plot_variants.R {input.vcf_file} {output.plot_file} 
+        > {log.stdout} 2> {log.stderr}
         """
