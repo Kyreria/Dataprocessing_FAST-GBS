@@ -10,7 +10,7 @@ configfile: "config/config.yaml"
 #Global variables
 data_dir = config["data_dir"]
 results_dir = config["results_dir"]
-# barcodes = config["barcodes.txt"]
+barcodes = config["barcodes_file"]
 ref_genome = config["ref_genome"]
 ref_genome_ext = config["ref_genome_ext"]
 sample_name = config["sample_name"]
