@@ -22,7 +22,8 @@ sample_names=["unknown_sample"]
 def get_sample_names_from_barcodes():
     """
     A function to get the sample names from the barcode file.
-    :return:
+    :return: This'll update the global samples_names variable to contain all the samples
+            from the barcode file
     """
     with open(f"{barcodes}", "r") as barcode_file:
         for line in barcode_file:
