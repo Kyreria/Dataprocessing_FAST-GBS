@@ -36,7 +36,10 @@ rule bcftools_mpileup:
     message:
         "Calling variants using bcftools on the following BAM files: {input.alignments}"
     log:
-        f"{results_dir}/logs/bcftools_mpileup/{sample_names}.log"
-    wrapper:
-        "v3.12.2/bio/bcftools/mpileup"
+        stdout = f"{results_dir}/logs/bcftools_mpileup/{sample_names}.log",
+        stderr = f"{results_dir}/logs/bcftools_mpileup/{sample_names}_err.log"
+    shell:
+        """
+        bcftools mpileup -o z -f {input.index} {input.alignments} > {log.stdout} 2> {log.stderr}
+        """
 
