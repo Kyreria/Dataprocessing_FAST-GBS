@@ -9,12 +9,14 @@ rule samtools_faidx:
     output:
         f"{results_dir}/{ref_genome}.fa.fai"
     log:
-        f"{results_dir}/logs/indexing/{ref_genome}.log"
-    message: "Indexing the used reference for the BAM mapping for the variant calling."
-    params:
-        extra=""
-    wrapper:
-        "v3.12.2/bio/samtools/faidx"
+        stdout = f"{results_dir}/logs/indexing/{ref_genome}.log",
+        stderr = f"{results_dir}/logs/indexing/{ref_genome}_err.log"
+    message:
+        "Indexing the used reference for the BAM mapping for the variant calling."
+    shell:
+        """
+        samtools faidx --fai-idx {output} {input.sample} > {log.stdout} 2> {log.stderr}
+        """
 
 """
 Due to the fact that platypus couldn't be build using conda and the necessary packages,
@@ -23,7 +25,7 @@ this has been replaced by a different variant calling method.
 
 rule bcftools_mpileup:
     input:
-        alignments = f"{results_dir}/mapped/{sample_names}.bam",
+        alignments = f"{results_dir}/mapped/{sample_names}.sorted.bam",
         ref = f"{data_dir}/{ref_genome}{ref_genome_ext}",  # this can be left out if --no-reference is in options
         index = f"{results_dir}/{ref_genome}.fa.fai"
     output:
@@ -31,7 +33,8 @@ rule bcftools_mpileup:
     params:
         uncompressed_bcf=False,
         extra="--max-depth 100 --min-BQ 15 --output-type z"
-    message: "Calling variants using bcftools on the following BAM files: {input.alignments}"
+    message:
+        "Calling variants using bcftools on the following BAM files: {input.alignments}"
     log:
         f"{results_dir}/logs/bcftools_mpileup/{sample_names}.log"
     wrapper:
