@@ -29,8 +29,6 @@ rule bwa_index:
     log:
         stdout = f"{results_dir}/logs/bwa_index.log",
         stderr = f"{results_dir}/logs/bwa_index_error.log"
-    params:
-        extra=""
     shell:
         """
         bwa index {input.genome} > {log.stdout} 2> {log.stderr}
