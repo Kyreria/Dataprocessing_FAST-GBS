@@ -20,7 +20,6 @@ data <- read.table(vcf_file, header= FALSE, comment.char= "#", stringsAsFactors 
 colnames(data) <- c("CHROM", "POS", "ID", "REF", "ALT", "QUAL", "FILTER", "INFO")
 
 # Making use of the new "package, plotVCF
-
 VCF_Plot <- createVCFplot(vcf_file, ORDERED=TRUE)
 PNG_File <- output
 

@@ -19,7 +19,6 @@ rule samtools_faidx:
 """
 Due to the fact that platypus couldn't be build using conda and the necessary packages,
 this has been replaced by a different variant calling method.
-The code for platypus is however still commented.
 """
 
 rule bcftools_mpileup:
