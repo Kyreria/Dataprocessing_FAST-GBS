@@ -3,14 +3,14 @@ This Snakefile is to demultiplex the fasta files,
  so they can be used by the rest of the rules.
 '''
 
-# Due to the fact that demultiplexing is a very niche case, this has been disabled and simply replaced.
-# It's been replaced by a rule to split a single paired ends sample file into a [sample]_r1 and [sample]_R2 file.
 
 rule sabre_demultiplex:
     input:
-        pass
+        forward = f"{data_dir}/seperated/{sample_name}_R1.fastq",
+        reverse = f"{data_dir}/seperated/{sample_name}_R2.fastq"
     output:
-        pass
+        unknown_1 = f"{data_dir}/demultiplexed/unknown_forward.fastq",
+        unknown_2 = f"{data_dir}/demultiplexed/unknown_reverse.fastq"
     log:
         stdout=f"{results_dir}/logs/sabre_demultiplex.log",
         stderr=f"{results_dir}/logs/sabre_demultiplex_error.log"
