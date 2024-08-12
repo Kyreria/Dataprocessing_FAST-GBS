@@ -1,0 +1,2 @@
+GAGAGTGT	testsplit_R1.fq	testsplit_R2.fq
+GAGTCACT	testpizza_R1.fq	test_pizza_R2.fq
