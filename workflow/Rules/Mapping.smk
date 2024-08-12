@@ -5,12 +5,12 @@ This snakefile is to align and map the reads,
 
 rule bwa_mem:
     input:
-        reads=[f"{results_dir}/trimmed/{sample_name}_R1.fastq", f"{results_dir}/trimmed/{sample_name}_R2.fastq"],
+        reads=[f"{results_dir}/trimmed/{sample_names}_R1.fastq", f"{results_dir}/trimmed/{sample_names}_R2.fastq"],
         idx=f"{data_dir}/{ref_genome}{ref_genome_ext}"
     output:
-        f"{results_dir}/mapped/{sample_name}.bam"
+        f"{results_dir}/mapped/{sample_names}.bam"
     log:
-        f"{results_dir}/logs/bwa_mem/{sample_name}.log"
+        f"{results_dir}/logs/bwa_mem/{sample_names}.log"
     params:
         extra="",
         sorting="samtools",  # Can be 'none', 'samtools' or 'picard'.

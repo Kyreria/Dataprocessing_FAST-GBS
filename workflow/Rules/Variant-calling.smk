@@ -23,17 +23,17 @@ this has been replaced by a different variant calling method.
 
 rule bcftools_mpileup:
     input:
-        alignments = f"{results_dir}/mapped/{sample_name}.bam",
+        alignments = f"{results_dir}/mapped/{sample_names}.bam",
         ref = f"{data_dir}/{ref_genome}{ref_genome_ext}",  # this can be left out if --no-reference is in options
         index = f"{results_dir}/{ref_genome}.fa.fai"
     output:
-        pileup=f"{results_dir}/pileups/{sample_name}.pileup.vcf"
+        pileup=f"{results_dir}/pileups/{sample_names}.pileup.vcf"
     params:
         uncompressed_bcf=False,
         extra="--max-depth 100 --min-BQ 15 --output-type z"
     message: "Calling variants using bcftools on the following BAM files: {input.alignments}"
     log:
-        f"{results_dir}/logs/bcftools_mpileup/{sample_name}.log"
+        f"{results_dir}/logs/bcftools_mpileup/{sample_names}.log"
     wrapper:
         "v3.12.2/bio/bcftools/mpileup"
 
