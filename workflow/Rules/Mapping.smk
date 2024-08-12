@@ -4,7 +4,7 @@ This snakefile is to align and map the reads,
 '''
 
 
-rule bwa_mem_shell:
+rule bwa_mem:
     input:
         reads=[f"{results_dir}/trimmed/{sample_names}_R1.fastq", f"{results_dir}/trimmed/{sample_names}_R2.fastq"],
         idx=f"{data_dir}/{ref_genome}{ref_genome_ext}",
