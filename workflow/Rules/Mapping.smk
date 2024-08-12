@@ -27,8 +27,11 @@ rule bwa_index:
     output:
         index = touch(f"{results_dir}/flag/genome_indexed")
     log:
-        f"{results_dir}/logs/bwa_index.log"
+        stdout = f"{results_dir}/logs/bwa_index.log",
+        stderr = f"{results_dir}/logs/bwa_index_error.log"
     params:
         extra=""
-    wrapper:
-        "v3.12.2/bio/bwa/index"
+    shell:
+        """
+        bwa index {input.genome} > {log.stdout} 2> {log.stderr}
+        """
