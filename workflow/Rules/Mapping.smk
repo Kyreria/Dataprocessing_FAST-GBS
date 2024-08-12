@@ -6,7 +6,8 @@ This snakefile is to align and map the reads,
 
 rule bwa_mem:
     input:
-        reads=[f"{results_dir}/trimmed/{sample_names}_R1.fastq", f"{results_dir}/trimmed/{sample_names}_R2.fastq"],
+        R1 = f"{results_dir}/trimmed/{sample_names}_R1.fastq",
+        R2 = f"{results_dir}/trimmed/{sample_names}_R2.fastq",
         idx=f"{data_dir}/{ref_genome}{ref_genome_ext}",
         flag=f"{results_dir}/flag/genome_indexed"
     output:
@@ -16,7 +17,7 @@ rule bwa_mem:
         stderr = f"{results_dir}/logs/bwa_mem/{sample_names}_err.log"
     shell:
         """
-        bwa mem -t 2 {input.idx} {input.reads} > {log.stdout} 2> {log.stderr}
+        bwa mem -t 2 {input.idx} {input.R1} {input.R2} | samtools view -bS > {log.stdout} 2> {log.stderr}
         """
 
 
