@@ -3,22 +3,22 @@ This snakefile is to align and map the reads,
  so they can be used for variant calling.
 '''
 
-rule bwa_mem:
+
+rule bwa_mem_shell:
     input:
         reads=[f"{results_dir}/trimmed/{sample_names}_R1.fastq", f"{results_dir}/trimmed/{sample_names}_R2.fastq"],
-        idx=f"{data_dir}/{ref_genome}{ref_genome_ext}"
+        idx=f"{data_dir}/{ref_genome}{ref_genome_ext}",
+        flag=f"{results_dir}/flag/genome_indexed"
     output:
         f"{results_dir}/mapped/{sample_names}.bam"
     log:
-        f"{results_dir}/logs/bwa_mem/{sample_names}.log"
-    params:
-        extra="",
-        sorting="samtools",  # Can be 'none', 'samtools' or 'picard'.
-        sort_order="queryname",  # Can be 'queryname' or 'coordinate'.
-        sort_extra=""  # Extra args for samtools/picard.
-    threads: 2
-    wrapper:
-        "v3.12.1/bio/bwa/mem"
+        stdout = f"{results_dir}/logs/bwa_mem/{sample_names}.log",
+        stderr = f"{results_dir}/logs/bwa_mem/{sample_names}_err.log"
+    shell:
+        """
+        bwa mem -t 2 {input.idx} {input.reads} > {log.stdout} 2> {log.stderr}
+        """
+
 
 
 rule bwa_index:
@@ -31,5 +31,5 @@ rule bwa_index:
         stderr = f"{results_dir}/logs/bwa_index_error.log"
     shell:
         """
-        bwa index {input.genome} > {log.stdout} 2> {log.stderr}
+        bwa index {input.genome} && touch {output} > {log.stdout} 2> {log.stderr}
         """
