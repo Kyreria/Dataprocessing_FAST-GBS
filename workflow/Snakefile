@@ -15,7 +15,20 @@ ref_genome = config["ref_genome"]
 ref_genome_ext = config["ref_genome_ext"]
 sample_name = config["sample_name"]
 sample_ext = config["sample_ext"]
+sample_names=["unknown_sample"]
 
+
+#Global function
+def get_sample_names_from_barcodes():
+    """
+    A function to get the sample names from the barcode file.
+    :return:
+    """
+    with open(f"{barcodes}", "r") as barcode_file:
+        for line in barcode_file:
+            split_line = line.strip().split("\t")
+            sample_names.append(split_line[1].split("_R")[0])
+    return sample_names
 
 #Included rules
 include: "Rules/Fasta.smk"
