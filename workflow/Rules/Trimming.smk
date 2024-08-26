@@ -5,8 +5,8 @@ This Snakefile is used to use CutAdapt and trim the fastQ files.
 rule trim_and_cut:
     # Input needs to be the demultiplexed FastQ bestanden
     input:
-        forward=f"{data_dir}/demultiplexed/{sample_names}_R1.fastq",
-        reverse=f"{data_dir}/demultiplexed/{sample_names}_R2.fastq"
+        forward_reads=f"{data_dir}/demultiplexed/{sample_names}_R1.fastq",
+        reverse_reads=f"{data_dir}/demultiplexed/{sample_names}_R2.fastq"
     output:
         fastq1=f"{results_dir}/trimmed/{sample_names}_R1.fastq",
         fastq2=f"{results_dir}/trimmed/{sample_names}_R2.fastq",
@@ -24,5 +24,5 @@ rule trim_and_cut:
     shell:
         """
         cutadapt {params.adapters} -o {output.fastq1} -p {output.fastq2} 
-        {input.forward} {input.reverse} > {log.stdout} 2> {log.stderr}
+        {input.forward_reads} {input.reverse_reads} > {log.stdout} 2> {log.stderr}
         """
