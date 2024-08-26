@@ -26,21 +26,21 @@ def dna(length):
     return ''.join(random.choice('CGTA') for _ in range(length))
 
 
-def readname_generator(namelength):
-    # Generates a random filler readname generator to go behind the > in the fasta.
-    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(namelength))
+def read_name_generator(name_length):
+    # Generates a random filler read_name generator to go behind the > in the fasta.
+    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(name_length))
 
 
-def random_fasta_generator(read_count, filename):
+def random_fasta_generator(read_count, file_name):
     # Variables for the fasta generator
     name_length = 12
     sequence_length = 160
-    forward_file = filename + "_R1" + ".fasta"
-    reverse_file = filename + "_R2" + ".fasta"
+    forward_file = file_name + "_R1" + ".fasta"
+    reverse_file = file_name + "_R2" + ".fasta"
 
     # This for loop generates the files
     for i in range(read_count):
-        read_name = ">" + readname_generator(name_length)
+        read_name = ">" + read_name_generator(name_length)
         sequence = barcode_selector() + dna(sequence_length)
         reverse_sequence = reverse_complement(sequence)
         # Write the forward read.
