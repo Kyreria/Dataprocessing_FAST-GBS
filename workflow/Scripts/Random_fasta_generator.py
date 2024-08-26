@@ -45,10 +45,12 @@ def random_fasta_generator(read_count, file_name):
         reverse_sequence = reverse_complement(sequence)
         # Write the forward read.
         with open(forward_file, "a") as fw:
-            fw.write(read_name + "\n" + sequence + "\n")
+            read_name_forward = read_name + ".1"
+            fw.write(read_name_forward + "\n" + sequence + "\n")
         # Write the reverse read
         with open(reverse_file, "a") as rw:
-            rw.write(read_name + "\n" + reverse_sequence + "\n")
+            read_name_reverse = read_name + ".2"
+            rw.write(read_name_reverse + "\n" + reverse_sequence + "\n")
 
 
 if __name__ == '__main__':
