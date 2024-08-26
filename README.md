@@ -28,13 +28,21 @@ cd Dataprocessing_FAST-GBS
 
 2. Prerequisites for running the pipeline.
 
-To run the pipeline, make sure that you have conda installed with mamba.
-This can otherwise be done by using the following commands.
+To run the pipeline,
+please make use of the conda_enviroment.yml under `Resources/Conda_Environment`
+to install the necessary conda environment.
+This can be done by using the following commands.
 
+The commands are assuming you're in the `Dataprocessing_FAST-GBS` folder, the root of the project.
 ```
-conda activate base
-conda install -n base -c conda-forge mamba
+conda env create -f Resources/Conda_Environment/dataprocessing_environment.yml
 ```
+
+You can then activate the environment running the following:
+```
+conda activate dataprocessing
+```
+
 
 ## Configuration
 
@@ -43,26 +51,20 @@ Please use this file to adjust any necessary settings.
 
 - `data_dir`: Path to the directory for the input data.
 - `results_dir`: Path to the directory where results will be stored.
-- `ref_genome`: genome file name, which must be in the `data_dir`.
 - `barcode_file`: Barcode file name, which must also be in `data_dir`
+- `ref_genome`: genome file name, which must be in the `data_dir`.
 - `ref_genome_ext`: The extension for the reference genome.
 - `sample_name`: The name for the sample.
 - `sample_ext`: the extension for the sample.
 - `type_of_sequence`: The type of sequence, this can be either single or paired.
-- `adaptor_sequence`: The adaptor sequence, this is for CutAdapt.
-- `output_file_name`: This is for the final output.
+- `adaptor_sequence`: The adaptor sequence(s), this is for CutAdapt trimming.
+- `output_file_name`: This is the file name for the final output.
 
 ## Running the pipeline
-
-Due to the fact that every tool is called upon by using the new wrapper format in Snakemake.
-You don't have to make a separate conda environment anymore.
-
-For more information, see the following link: [Snakemake wrappers](https://snakemake-wrappers.readthedocs.io/en/stable/)
-
-To run the snakemake pipeline, simply use the following command:
+To run the snakemake pipeline, simply use the following command whilst in the dataprocessing conda environment:
 
 ```
-snakemake --cores <number_of_cores> --use-conda
+snakemake --cores <number_of_cores> --snakefile Snakefile
 ```
 
 You can replace `<number_of_cores>` with the desired number of CPU cores you wish to use.
