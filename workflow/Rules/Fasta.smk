@@ -36,19 +36,3 @@ rule sabre_demultiplex:
          -w unknown_sample_R2.fastq > {log.stdout} 2> {log.stderr}
          )
         """
-
-
-rule seperate_paired_reads:
-    input:
-        fastq_file = f"{data_dir}/{sample_name}.fastq"
-    output:
-        R1 = f"{data_dir}/seperated/{sample_name}_R1.fastq",
-        R2 = f"{data_dir}/seperated/{sample_name}_R2.fastq"
-    message:
-        "Splitting paired end reads from a single file into 2 seperate files."
-    shell:
-        """
-        python Scripts/Read_seperator.py -i {input} -o {output}
-        """
-
-
