@@ -2,14 +2,12 @@
 Dataprocessing project for converting the FAST-GBS pipeline to a snakemake pipeline.
 This is the final assigment for the Data Processing course from the Bioinformatics bachelor program of the [Hanze University of Applied Scieces.](https://www.hanze.nl/nl)
 
-Crossed out sections have been scrapped till a fix is found for their implementation.
-
 The pipeline performs the following steps:
 
 1. Demultiplexing raw sequencing reads using Sabre.
-2. Adapter trimming with CutAdapt
-3. Read mapping with BWA-MEM
-4. Variant calling with BCFTools mpileup.
+2. Adapter trimming with CutAdapt.
+3. Read mapping with BWA-MEM.
+4. Variant calling with BCFTools mpileup, instead of using [Platypus](https://www.rdm.ox.ac.uk/research/lunter-group/lunter-group/platypus-a-haplotype-based-variant-caller-for-next-generation-sequence-data).
 5. Visualization of the VCF file with an R-script, here we use the [plot-VCF package](https://github.com/cccnrc/plot-VCF).
 
 ## Prerequisites
@@ -57,9 +55,9 @@ Please use this file to adjust any necessary settings.
 ## Running the pipeline
 
 Due to the fact that every tool is called upon by using the new wrapper format in Snakemake.
-You don't have to make a seperate conda enviroment anymore.
+You don't have to make a separate conda environment anymore.
 
-For more informations, see the following link: [Snakemake wrappers](https://snakemake-wrappers.readthedocs.io/en/stable/)
+For more information, see the following link: [Snakemake wrappers](https://snakemake-wrappers.readthedocs.io/en/stable/)
 
 To run the snakemake pipeline, simply use the following command:
 
