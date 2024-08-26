@@ -28,7 +28,8 @@ def dna(length):
 
 def read_name_generator(name_length):
     # Generates a random filler read_name generator to go behind the > in the fasta.
-    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(name_length))
+    return ''.join(random.choice(string.ascii_uppercase + string.digits)
+                   for _ in range(name_length))
 
 
 def random_fasta_generator(read_count, file_name):
@@ -56,8 +57,10 @@ def random_fasta_generator(read_count, file_name):
 if __name__ == '__main__':
     # Parse the arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument("-l", "--length", type=int, help="Length of the FASTA", required=True)
-    parser.add_argument("-o", "--output", help="Output name for the fasta files", required=True)
+    parser.add_argument("-l", "--length", type=int,
+                        help="Length of the FASTA", required=True)
+    parser.add_argument("-o", "--output",
+                        help="Output name for the fasta files", required=True)
     args = parser.parse_args()
 
     # Run the generator
