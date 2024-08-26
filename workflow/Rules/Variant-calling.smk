@@ -40,6 +40,6 @@ rule bcftools_mpileup:
         stderr = f"{results_dir}/logs/bcftools_mpileup/{sample_names}_err.log"
     shell:
         """
-        bcftools mpileup -o z -f {input.index} {input.alignments} > {log.stdout} 2> {log.stderr}
+        bcftools mpileup -o {output.pileup} -O z -f {input.index} {input.alignments} > {log.stdout} 2> {log.stderr}
         """
 
