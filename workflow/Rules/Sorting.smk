@@ -13,5 +13,5 @@ rule samtools_sort:
         stderr = f"{results_dir}/logs/samtools/{sample_names}_err.log"
     shell:
         """
-        samtools sort {input} > {log.stdout} 2> {log.stderr}
+        samtools sort {input} -o {output} > {log.stdout} 2> {log.stderr}
         """
