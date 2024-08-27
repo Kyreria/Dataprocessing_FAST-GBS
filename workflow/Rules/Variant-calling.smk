@@ -25,7 +25,7 @@ this has been replaced by a different variant calling method.
 
 rule bcftools_mpileup:
     input:
-        alignments = expand(f"{results_dir}/mapped/{{sample_name}}.bam", sample_name=sample_names),
+        alignments = expand(f"{results_dir}/mapped/{{sample_name}}.sorted.bam", sample_name=sample_names),
         ref = f"{data_dir}/{ref_genome}{ref_genome_ext}"  # this can be left out if --no-reference is in options
         #index = f"{results_dir}/{ref_genome}.fa.fai"
     output:

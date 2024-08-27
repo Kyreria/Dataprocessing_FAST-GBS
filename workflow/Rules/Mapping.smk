@@ -17,7 +17,7 @@ rule bwa_mem:
         # stderr = expand(f"{results_dir}/logs/bwa_mem/{{sample_name}}_err.log", sample_name=sample_names)
     shell:
         """
-        bwa mem -t 2 {input.idx} {input.R1} {input.R2} | samtools sort -o {output}
+        bwa mem -t 2 {input.idx} {input.R1} {input.R2} | samtools view -bS -o {output}
         """
 
 
