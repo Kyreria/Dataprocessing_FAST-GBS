@@ -46,11 +46,12 @@ rule all:
         expand(f"{results_dir}/pileups/{{sample_name}}.pileup.vcf", sample_name = sample_names),
         f"{results_dir}/variants.png"
 
+# This rule is so that you can generate 2 dummy .fastq files containing 1000 lines of forward and reverse reads.
 rule generate_test_fasta_files:
     message:
         "Generating 1000 reads in forward & reverse."
     shell:
         """
-        python Scripts/Random_fasta_generator.py -l 1000 -o testdata
+        python Scripts/Random_fastq_generator.py -l 1000 -o testdata
         """
         
