@@ -33,6 +33,6 @@ rule sabre_demultiplex:
         mkdir -p {params.output_dir}
         cd {params.output_dir}
         sabre -pe -f {input.forward_sample} -r {input.reverse_sample} -b {barcodes} -u unknown_sample_R1.fastq
-         -w unknown_sample_R2.fastq > {log.stdout} 2> {log.stderr}
+         -w unknown_sample_R2.fastq 2> {log.stderr}
          )
         """
