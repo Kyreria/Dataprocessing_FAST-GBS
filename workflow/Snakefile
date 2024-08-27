@@ -47,6 +47,8 @@ rule all:
         f"{results_dir}/variants.png"
 
 rule generate_test_fasta_files:
+    message:
+        "Generating 1000 reads in forward & reverse."
     shell:
         """
         python Scripts/Random_fasta_generator.py -l 1000 -o testdata
