@@ -30,7 +30,7 @@ rule sabre_demultiplex:
     shell:
         """
         (
-        mkdir -p {paramsoutput_dir}
+        mkdir -p {params.output_dir}
         cd {params.output_dir}
         sabre pe -f {input.forward_sample} -r {input.reverse_sample} -b {barcodes} -u unknown_sample_R1.fastq
          -w unknown_sample_R2.fastq -c
