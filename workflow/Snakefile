@@ -43,5 +43,5 @@ include: "Rules/Graph_plotting.smk"
 #Output is the variant file and the plotted variants.
 rule all:
     input:
-        expand(f"{results_dir}/pileups/{sample_name}.pileup.vcf", sample_name = sample_names),
+        expand(f"{results_dir}/pileups/{{sample_name}}.pileup.vcf", sample_name = sample_names),
         f"{results_dir}/variants.png"
