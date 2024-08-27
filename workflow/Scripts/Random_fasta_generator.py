@@ -36,8 +36,8 @@ def random_fasta_generator(read_count, file_name):
     # Variables for the fasta generator
     name_length = 12
     sequence_length = 160
-    forward_file = file_name + "_R1" + ".fasta"
-    reverse_file = file_name + "_R2" + ".fasta"
+    forward_file = file_name + "_R1" + ".fastq"
+    reverse_file = file_name + "_R2" + ".fastq"
 
     # This for loop generates the files
     for i in range(read_count):
