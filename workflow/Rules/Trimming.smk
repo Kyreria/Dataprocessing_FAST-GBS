@@ -13,9 +13,9 @@ rule trim_and_cut:
         # qc= expand(f"{results_dir}/trimmed/{{sample_name}}.qc.txt", sample_name=sample_names)
     params:
         # https://cutadapt.readthedocs.io/en/stable/guide.html#adapter-types
-        adapters="-a AGAGCACACGTCTGAACTCCAGTCAC -g AGATCGGAAGAGCACACGT -A AGAGCACACGTCTGAACTCCAGTCAC -G AGATCGGAAGAGCACACGT",
+        adapters="-a AGAGCACACGTCTGAACTCCAGTCAC -A AGAGCACACGTCTGAACTCCAGTCAC"
         # https://cutadapt.readthedocs.io/en/stable/guide.html#
-        extra="--minimum-length 1 -q 20"
+        # extra="--minimum-length 1 -q 20"
     # log:
         # stdout= expand(f"{results_dir}/logs/cutadapt/{{sample_name}}.log", sample_name=sample_names),
         # stderr= expand(f"{results_dir}/logs/cutadapt/{{sample_name}}_err.log", sample_name=sample_names)
@@ -23,6 +23,5 @@ rule trim_and_cut:
         "Trimming and cutting files with CutAdapt"
     shell:
         """
-        cutadapt {params.adapters} -o {output.fastq1} -p {output.fastq2} 
-        {input.forward_reads} {input.reverse_reads}
+        cutadapt {params.adapters} -o {output.fastq1} -p {output.fastq2} {input.forward_reads} {input.reverse_reads}
         """
