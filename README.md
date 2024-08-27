@@ -64,7 +64,7 @@ Please use this file to adjust any necessary settings.
 To run the snakemake pipeline, simply use the following command whilst in the dataprocessing conda environment:
 
 ```
-snakemake --cores <number_of_cores> --snakefile Snakefile
+snakemake --cores <number_of_cores> --snakefile workflow/Snakefile
 ```
 
 You can replace `<number_of_cores>` with the desired number of CPU cores you wish to use.
