@@ -29,10 +29,7 @@ rule sabre_demultiplex:
         output_dir = f"{results_dir}/demultiplexed"
     shell:
         """
-        (
-        mkdir -p {params.output_dir}
-        cd {params.output_dir}
-        sabre -pe -f {input.forward_sample} -r {input.reverse_sample} -b {barcodes} -u unknown_sample_R1.fastq
+        (sabre -pe -f {input.forward_sample} -r {input.reverse_sample} -b {barcodes} -u unknown_sample_R1.fastq
          -w unknown_sample_R2.fastq
-         )
+         ) 2> {log.stderr}
         """
