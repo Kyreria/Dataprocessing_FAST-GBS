@@ -25,14 +25,11 @@ this has been replaced by a different variant calling method.
 
 rule bcftools_mpileup:
     input:
-        alignments = f"{results_dir}/sorted/{sample_names}.sorted.bam",
-        ref = f"{data_dir}/{ref_genome}{ref_genome_ext}",  # this can be left out if --no-reference is in options
+        alignments = f"{results_dir}/sorted/{sample_names}_sorted.bam",
+        #ref = f"{data_dir}/{ref_genome}{ref_genome_ext}",  # this can be left out if --no-reference is in options
         index = f"{results_dir}/{ref_genome}.fa.fai"
     output:
         pileup=f"{results_dir}/pileups/{sample_names}.pileup.vcf"
-    params:
-        uncompressed_bcf=False,
-        extra="--max-depth 100 --min-BQ 15 --output-type z"
     message:
         "Calling variants using bcftools on the following BAM files: {input.alignments}"
     log:
