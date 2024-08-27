@@ -32,5 +32,5 @@ rule bwa_index:
         stderr = f"{results_dir}/logs/bwa_index_error.log"
     shell:
         """
-        bwa index {input.genome} && touch {output} 2> {log.stderr}
+        bwa index {input.genome} && touch {output}
         """

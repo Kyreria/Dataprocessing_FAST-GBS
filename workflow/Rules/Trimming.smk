@@ -24,5 +24,5 @@ rule trim_and_cut:
     shell:
         """
         cutadapt {params.adapters} -o {output.fastq1} -p {output.fastq2} 
-        {input.forward_reads} {input.reverse_reads} > {log.stdout} 2> {log.stderr}
+        {input.forward_reads} {input.reverse_reads}
         """
