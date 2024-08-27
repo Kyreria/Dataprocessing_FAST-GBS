@@ -12,9 +12,9 @@ rule bwa_mem:
         flag=f"{results_dir}/flag/genome_indexed"
     output:
         expand(f"{results_dir}/mapped/{{sample_name}}.bam", sample_name=sample_names)
-    # log:
-        # stdout = expand(f"{results_dir}/logs/bwa_mem/{{sample_name}}.log", sample_name=sample_names),
-        # stderr = expand(f"{results_dir}/logs/bwa_mem/{{sample_name}}_err.log", sample_name=sample_names)
+    log:
+        stdout = expand(f"{results_dir}/logs/bwa_mem/{{sample_name}}.log", sample_name=sample_names),
+        stderr = expand(f"{results_dir}/logs/bwa_mem/{{sample_name}}_err.log", sample_name=sample_names)
     shell:
         """
         bwa mem {input.idx} {input.R1} {input.R2} | samtools sort -o {output}
