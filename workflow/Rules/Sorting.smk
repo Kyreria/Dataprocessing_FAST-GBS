@@ -5,13 +5,13 @@ This snakefile is to sort the reads.
 
 rule samtools_sort:
     input:
-        f"{results_dir}/mapped/{{sample_name}}.bam"
+        expand(f"{results_dir}/mapped/{{sample_name}}.bam", sample_name=sample_names)
     output:
-        f"{results_dir}/sorted/{{sample_name}}.sorted.bam"
+        expand(f"{results_dir}/sorted/{{sample_name}}.sorted.bam", sample_name=sample_names)
     log:
-        stdout = f"{results_dir}/logs/samtools/{{sample_name}}.log",
-        stderr = f"{results_dir}/logs/samtools/{{sample_name}}_err.log"
+        stdout = expand(f"{results_dir}/logs/samtools/{{sample_name}}.log", sample_name=sample_names),
+        stderr = expand(f"{results_dir}/logs/samtools/{{sample_name}}_err.log", sample_name=sample_names)
     shell:
         """
-        (samtools sort {input} -o {output} ) > {log.stdout} 2> {log.stderr}
+        samtools sort -o {output} {input} > {log.stdout} 2> {log.stderr}
         """

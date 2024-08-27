@@ -8,4 +8,3 @@ sample_ext: .fastq
 type_of_sequence: paired
 adaptor_sequence: ""
 output_file_name: variants.vcf
-barcode_sample_names: ["unknown_sample", "testsplit", "testpizza"]

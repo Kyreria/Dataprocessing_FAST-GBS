@@ -59,15 +59,8 @@ Please use this file to adjust any necessary settings.
 - `type_of_sequence`: The type of sequence, this can be either single or paired.
 - `adaptor_sequence`: The adaptor sequence(s), this is for CutAdapt trimming.
 - `output_file_name`: This is the file name for the final output.
-- `barcode_file_names`: This has to be filled in after running a snakemake rule, this'll be explained further down below.
 
 ## Running the pipeline
-
-Before you can run the pipeline, make sure to run the following command and paste the output in the config file behind `barcode_sample_names`, make sure unknown_files stays in the config as well.:
-```
-snakemake get_sample_names_from_barcodes
-```
-
 To run the snakemake pipeline, simply use the following command whilst in the dataprocessing conda environment:
 
 ```
