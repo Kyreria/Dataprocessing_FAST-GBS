@@ -45,3 +45,10 @@ rule all:
     input:
         expand(f"{results_dir}/pileups/{{sample_name}}.pileup.vcf", sample_name = sample_names),
         f"{results_dir}/variants.png"
+
+rule generate_test_fasta_files:
+    shell:
+        """
+        python Scripts/Random_fasta_generator.py -l 1000 -o testdata
+        """
+        
