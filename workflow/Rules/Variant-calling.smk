@@ -37,6 +37,6 @@ rule bcftools_mpileup:
         stderr = expand(f"{results_dir}/logs/bcftools_mpileup/{{sample_name}}_err.log", sample_name=sample_names)
     shell:
         """
-        bcftools mpileup -o {output.pileup} -O z -f {input.index} {input.alignments} > {log.stdout} 2> {log.stderr}
+        (bcftools mpileup -o {output.pileup} -O z -f {input.index} {input.alignments}) > {log.stdout} 2> {log.stderr}
         """
 
