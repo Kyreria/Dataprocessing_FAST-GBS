@@ -11,7 +11,7 @@ def get_new_demultiplex_file_names():
     This'll output the full pathing so that the Snakemake rule structure can continue.
     :return:
     """
-    return [f"{results_dir}/demultiplexed/{sample}_R{read}.fastq" for read in [1,2] for sample in get_sample_names_from_barcodes()]
+    return [f"{results_dir}/demultiplexed/{sample}_R{read}.fastq" for read in [1,2] for sample in barcode_sample_names]
 
 
 rule sabre_demultiplex:

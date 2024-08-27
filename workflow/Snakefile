@@ -15,22 +15,9 @@ ref_genome = config["ref_genome"]
 ref_genome_ext = config["ref_genome_ext"]
 sample_file_name = config["sample_file_name"]
 sample_ext = config["sample_ext"]
-sample_names=["unknown_sample"]
+barcode_sample_names=config["barcode_sample_names"]
 
 
-#Global function
-def get_sample_names_from_barcodes():
-    """
-    A function to get the sample names from the barcode file.
-    :return: This'll update the global samples_names variable to contain all the samples
-            from the barcode file
-    """
-    with open(f"{barcodes}", "r") as barcode_file:
-        for line in barcode_file:
-            split_line = line.strip().split("\t")
-            if split_line[1].split("_R")[0] not in sample_names:
-                sample_names.append(split_line[1].split("_R")[0])
-    return sample_names
 
 #Included rules
 include: "Rules/Fasta.smk"
@@ -43,12 +30,29 @@ include: "Rules/Graph_plotting.smk"
 #Output is the variant file and the plotted variants.
 rule all:
     input:
-        expand(f"{results_dir}/pileups/{{sample_name}}.pileup.vcf", sample_name = sample_names),
+        expand(f"{results_dir}/pileups/{{sample_name}}.pileup.vcf", sample_name = barcode_sample_names),
         f"{results_dir}/variants.png"
+
 
 rule generate_test_fasta_files:
     shell:
         """
         python Scripts/Random_fasta_generator.py -l 1000 -o testdata
         """
-        
+
+
+rule get_sample_names_from_barcodes:
+    """
+    A function to get the sample names from the barcode file.
+    :return: This'll update the global samples_names variable to contain all the samples
+            from the barcode file
+    """
+    params:
+        barcodefile = config["barcodes_file"]
+    run:
+        with open(f"{params.barcodefile}", "r") as bar_file:
+            for line in bar_file:
+                split_line = line.strip().split("\t")
+                if split_line[1].split("_R")[0] not in barcode_sample_names:
+                    barcode_sample_names.append(split_line[1].split("_R")[0])
+        print(barcode_sample_names)
