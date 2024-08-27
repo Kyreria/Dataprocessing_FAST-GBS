@@ -25,16 +25,16 @@ this has been replaced by a different variant calling method.
 
 rule bcftools_mpileup:
     input:
-        alignments = f"{results_dir}/sorted/{sample_names}_sorted.bam",
+        alignments = expand(f"{results_dir}/sorted/{{sample_name}}.sorted.bam", sample_name=sample_names),
         #ref = f"{data_dir}/{ref_genome}{ref_genome_ext}",  # this can be left out if --no-reference is in options
         index = f"{results_dir}/{ref_genome}.fa.fai"
     output:
-        pileup=f"{results_dir}/pileups/{sample_names}.pileup.vcf"
+        pileup=expand(f"{results_dir}/pileups/{{sample_name}}.pileup.vcf", sample_name=sample_names)
     message:
         "Calling variants using bcftools on the following BAM files: {input.alignments}"
     log:
-        stdout = f"{results_dir}/logs/bcftools_mpileup/{sample_names}.log",
-        stderr = f"{results_dir}/logs/bcftools_mpileup/{sample_names}_err.log"
+        stdout = expand(f"{results_dir}/logs/bcftools_mpileup/{{sample_name}}.log", sample_name=sample_names),
+        stderr = expand(f"{results_dir}/logs/bcftools_mpileup/{{sample_name}}_err.log", sample_name=sample_names)
     shell:
         """
         bcftools mpileup -o {output.pileup} -O z -f {input.index} {input.alignments} > {log.stdout} 2> {log.stderr}

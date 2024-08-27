@@ -16,8 +16,8 @@ def get_new_demultiplex_file_names():
 
 rule sabre_demultiplex:
     input:
-        forward_sample = f"{data_dir}/{sample_name}_R1.fastq",
-        reverse_sample = f"{data_dir}/{sample_name}_R2.fastq"
+        forward_sample = f"{data_dir}/{sample_file_name}_R1.fastq",
+        reverse_sample = f"{data_dir}/{sample_file_name}_R2.fastq"
     output:
         output_files = get_new_demultiplex_file_names()
     log:

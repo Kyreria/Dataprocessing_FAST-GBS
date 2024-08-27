@@ -13,7 +13,7 @@ results_dir = config["results_dir"]
 barcodes = config["barcodes_file"]
 ref_genome = config["ref_genome"]
 ref_genome_ext = config["ref_genome_ext"]
-sample_name = config["sample_name"]
+sample_file_name = config["sample_file_name"]
 sample_ext = config["sample_ext"]
 sample_names=["unknown_sample"]
 
@@ -43,5 +43,5 @@ include: "Rules/Graph_plotting.smk"
 #Output is the variant file and the plotted variants.
 rule all:
     input:
-        f"{results_dir}/pileups/{sample_name}.pileup.vcf",
+        expand(f"{results_dir}/pileups/{sample_name}.pileup.vcf", sample_name = sample_names),
         f"{results_dir}/variants.png"
