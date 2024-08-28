@@ -14,5 +14,5 @@ rule plot_variants:
         "Plotting the variants now!"
     shell:
         """
-        Rscript Scripts/plot_variants.R {input.vcf_file} {output.plot_file}
+        Rscript Scripts/plot_variants.R {input.vcf_file} {output.plot_file} 2> {log.stderr}
         """

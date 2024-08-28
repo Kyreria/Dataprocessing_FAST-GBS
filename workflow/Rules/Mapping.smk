@@ -17,7 +17,7 @@ rule bwa_mem:
         stderr = expand(f"{results_dir}/logs/bwa_mem/{{sample_name}}_err.log", sample_name=sample_names)
     shell:
         """
-        bwa mem {input.idx} {input.R1} {input.R2} | samtools sort -o {output}
+        bwa mem {input.idx} {input.R1} {input.R2} | samtools sort -o {output} 2> {log.stderr}
         """
 
 
@@ -32,5 +32,5 @@ rule bwa_index:
         stderr = f"{results_dir}/logs/bwa_index_error.log"
     shell:
         """
-        bwa index {input.genome} && touch {output}
+        (bwa index {input.genome} && touch {output}) 2> {log.stderr}
         """

@@ -21,5 +21,5 @@ rule trim_and_cut:
         "Trimming and cutting files with CutAdapt"
     shell:
         """
-        cutadapt {params.adapters} -o {output.fastq1} -p {output.fastq2} {input.forward_reads} {input.reverse_reads}
+        cutadapt {params.adapters} -o {output.fastq1} -p {output.fastq2} {input.forward_reads} {input.reverse_reads} 2> {log.stderr}
         """

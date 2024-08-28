@@ -26,8 +26,8 @@ this has been replaced by a different variant calling method.
 rule bcftools_mpileup:
     input:
         alignments = expand(f"{results_dir}/mapped/{{sample_name}}.bam", sample_name=sample_names),
-        ref = f"{data_dir}/{ref_genome}{ref_genome_ext}"  # this can be left out if --no-reference is in options
-        #index = f"{results_dir}/{ref_genome}.fa.fai"
+        ref = f"{data_dir}/{ref_genome}{ref_genome_ext}",  # this can be left out if --no-reference is in options
+        index = f"{results_dir}/{ref_genome}.fa.fai"
     output:
         pileup=expand(f"{results_dir}/pileups/{{sample_name}}.pileup.vcf", sample_name=sample_names)
     message:
@@ -37,6 +37,6 @@ rule bcftools_mpileup:
         stderr = expand(f"{results_dir}/logs/bcftools_mpileup/{{sample_name}}_err.log", sample_name=sample_names)
     shell:
         """
-        bcftools mpileup -Ou -f {input.ref} {input.alignments} | bcftools call -mv -Ov -o {output.pileup}
+        bcftools mpileup -Ou -f {input.ref} {input.alignments} | bcftools call -mv -Ov -o {output.pileup} 2> {log.stderr}
         """
 
